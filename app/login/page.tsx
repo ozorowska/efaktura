@@ -2,9 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signIn } from "../utils/auth";
+import { auth, signIn } from "../utils/auth";
+import { SubmitButton } from "@/components/SubmitBtns";
+import { redirect } from "next/navigation";
 
-export default function Login(){
+export default async function Login(){
+    const session = await auth();
+    if(session?.user) {
+        redirect('/dashboard')
+    }
     return(
        <>
         
@@ -29,7 +35,7 @@ export default function Login(){
                         
                         </div>
                         <div>
-                        <Button>Zaloguj</Button>
+                        <SubmitButton />
                         </div>
                     </form>
                 </CardContent>

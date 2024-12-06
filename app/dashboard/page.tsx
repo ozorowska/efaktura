@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import {auth} from "../utils/auth";
+import {auth, signOut} from "../utils/auth";
 import { requireUser } from "../utils/hooks";
 
 export default async function DashboardRoute() {
@@ -7,6 +7,15 @@ export default async function DashboardRoute() {
     return(
         <div>
             <p>home</p>
+            <form
+      action={async () => {
+        "use server"
+        await signOut()
+      }}
+    >
+      <button type="submit">Sign Out</button>
+    </form>
+            
         </div>
     )
 }
